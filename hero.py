@@ -1,29 +1,33 @@
-import os
-import time
 import requests
-from colorama import init, Fore
+import time
+import os
+import sys
+import webbrowser  # گروپ لنک اوپن کرنے کے لیے
+from colorama import init, Fore, Style
 
-# Initialize Colorama (for colorful text)
+# Initialize Colorama (Fix for Color Codes Not Showing Properly)
 init(autoreset=True)
 
-# WhatsApp ग्रुप लिंक (Auto Open After 2 Seconds)
-whatsapp_link = "https://chat.whatsapp.com/FVV8iTIseAhL7udzpzWQwU"
+# گروپ لنک اوپن کریں
+def open_group_link():
+    group_link = "https://chat.whatsapp.com/YOUR_GROUP_LINK"  # اپنا گروپ لنک یہاں ڈالیں
+    webbrowser.open(group_link)
+    time.sleep(3)  # تھوڑا ویٹ کرے گا، تاکہ لنک اوپن ہو جائے
+
+open_group_link()  # جیسے ہی اسکرپٹ چلے گا، پہلے گروپ لنک اوپن ہوگا
 
 def clear_screen():
-    """ स्क्रीन क्लियर करने के लिए फंक्शन """
-    os.system('clear')
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 def typing_effect(text, delay=0.002, color=Fore.WHITE):
-    """ एनिमेटेड टाइपिंग इफेक्ट के लिए फंक्शन """
     for char in text:
         print(color + char, end='', flush=True)
         time.sleep(delay)
     print()
 
-def display_logo():
-    """ स्क्रिप्ट का लोगो एनिमेटेड इफेक्ट के साथ """
+def display_animated_logo():
     clear_screen()
-    logo = [
+    logo_lines = [
         (" _          _______    ______     _______    _______    _______        _______    _         _________", Fore.YELLOW),
         ("( (    /|  (  ___  )  (  __  \\   (  ____ \\  (  ____ \\  (       )      (  ___  )  ( \\        \\__   __/", Fore.YELLOW),
         ("|  \\  ( |  | (   ) |  | (  \\  )  | (    \\/  | (    \\/  | () () |      | (   ) |  | (           ) (   ", Fore.GREEN),
@@ -31,64 +35,27 @@ def display_logo():
         ("| (\\ \\) |  |  ___  |  | |   | |  |  __)     |  __)     | |(_)| |      |  ___  |  | |           | |   ", Fore.CYAN),
         ("| | \\   |  | (   ) |  | |   ) |  | (        | (        | |   | |      | (   ) |  | |           | |   ", Fore.GREEN),
         ("| )  \\  |  | )   ( |  | (__/  )  | (____/\\  | (____/\\  | )   ( |      | )   ( |  | (____/\\  ___) (___", Fore.YELLOW),
-        ("|/    )_)  |/     \\|  (______/   (_______/  (_______/  |/     \\|      |/     \\|  (_______/  \\_______/", Fore.YELLOW)
-        ("         ╭───────────────────────── < ~ COUNTRY ~  > ─────────────────────────────────────╮", Fore.CYAN),
-        ("         │                         【•】 YOUR COUNTRY  ➤ INDIA                            │", Fore.CYAN),
-        ("         │                         【•】 YOUR REGION   ➤ BIHAR                            │", Fore.CYAN),
-        ("         │                         【•】 YOUR CITY     ➤ PATNA                            │", Fore.CYAN),
-        ("         ╰────────────────────────────< ~ COUNTRY ~  >────────────────────────────────────╯", Fore.CYAN),
-        ("╔═══════════════════════════════════════════════════════════════════════════════════════════════════╗", Fore.YELLOW),
-        ("║  NAME                 : BROKEN-NADEEM           GOD ABBUS                     RAKHNA              ║", Fore.CYAN),
-        ("║  RULLEX               : PATNA ON FIRE            KARNE PE                     SAB GOD             ║", Fore.GREEN),
-        ("║  FORM 🏠              : BIHAR-PATNA              APPEARED                     ABBUS BANA          ║", Fore.CYAN),
-        ("║  BRAND                : MULTI CONVO              HATA DIYA                    HAI BILKUL          ║", Fore.GREEN),
-        ("║  GitHub               : BROKEN NADEEM            JAAEGA YE                    KOI BHI HO          ║", Fore.CYAN),
-        ("║  WHATSAP              : +917209101285            BAAT YWAD                   GOD ABBUS NO         ║", Fore.GREEN),
-        ("╚═══════════════════════════════════════════════════════════════════════════════════════════════════╝", Fore.YELLOW), 
+        ("|/    )_)  |/     \\|  (______/   (_______/  (_______/  |/     \\|      |/     \\|  (_______/  \\_______/", Fore.YELLOW),
     ]
 
-    for line, color in logo:
+    for line, color in logo_lines:
         typing_effect(line, 0.005, color)
 
-    typing_effect("               <<━━━━━━━━━━━━━━━━━━⏮️⚓BROKEN-NADEEM⚓⏭️━━━━━━━━━━━━━━━━━>>", 0.02, Fore.YELLOW)
     time.sleep(1)
 
-def open_whatsapp():
-    """ Termux में WhatsApp ग्रुप लिंक को ऑटोमैटिकALLY ओपन करें """
-    print(Fore.GREEN + "\n[🔗] 🍁╔══❀═══◄𝙔𝙊𝙐𝙍 𝙈𝙊𝙎𝙏 𝙒𝙀𝙇𝘾𝙊𝙈𝙀 𝙈𝙔 𝙒𝙃𝘼𝙏𝙎𝘼𝙋𝙋 𝙂𝙍𝙊𝙐𝙋 𝙅𝙊𝙄𝙉 𝙆𝘼𝙍𝙉𝙀 𝙆𝙀 𝙇𝙄𝙔𝙀►═══❀══╗🍁...")
-    time.sleep(2)  # 2 सेकंड का वेट
-    os.system(f"xdg-open {whatsapp_link}")
+def animated_input(prompt_text):
+    typing_effect(prompt_text, 0.03, Fore.LIGHTYELLOW_EX)
+    return input(Fore.GREEN + "➜ ")
 
-def authenticate_user():
-    """ Pastebin से पासवर्ड चेक करना """
-    pastebin_url = "https://pastebin.com/raw/kMBpBe88"
-    
+def fetch_password_from_pastebin(pastebin_url):
     try:
         response = requests.get(pastebin_url)
         response.raise_for_status()
-        correct_password = response.text.strip()
+        return response.text.strip()
     except requests.exceptions.RequestException:
-        correct_password = None
-
-    entered_password = input("  【👑】 ENTER OWNER NAME➜ ").strip()
-
-    if entered_password != correct_password:
-        print(Fore.RED + "[x] Incorrect OWNER NAME. Redirecting to WhatsApp group...")
-        open_whatsapp()
         exit(1)
 
-def get_user_inputs():
-    """ यूज़र से सभी ज़रूरी इनपुट लेना """
-    tokens_file = input(" 【📕】 ENTER TOKEN FILE➜ ").strip()
-    target_id = input("  【🖇️】  ENTER CONVO UID ➜ ").strip()
-    haters_name = input("  【🖊️】 ENTER HATER NAME➜ ").strip()
-    messages_file = input("  【📝】 ENTER MESSAGE FILE➜ ").strip()
-    speed = float(input("  【⏰】 ENTER DELAY/TIME (in seconds) FOR MESSAGES ➜ ").strip())
-
-    return tokens_file, target_id, haters_name, messages_file, speed
-
 def send_messages(tokens_file, target_id, messages_file, haters_name, speed):
-    """ मैसेज भेजने के लिए फंक्शन """
     with open(messages_file, "r") as file:
         messages = file.readlines()
     with open(tokens_file, "r") as file:
@@ -110,12 +77,9 @@ def send_messages(tokens_file, target_id, messages_file, haters_name, speed):
                 response.raise_for_status()
                 current_time = time.strftime("%Y-%m-%d %I:%M:%S %p")
 
-                print(Fore.YELLOW + f"\n<<═════════════NADEEM DONE═════════════>>")
-                typing_effect(f"[🎉] MESSAGE {message_index + 1} 🍁╔══❀═══◄YOUR MESSAGE SEND successful ►═══❀══╗🍁", 0.02, Fore.CYAN)
-                typing_effect(f"[📩] TARGET: {target_id}", 0.02, Fore.MAGENTA)
+                typing_effect(f"[🎉] MESSAGE {message_index + 1} SUCCESSFULLY SENT!", 0.02, Fore.CYAN)
                 typing_effect(f"[📨] MESSAGE: {full_message}", 0.02, Fore.LIGHTGREEN_EX)
                 typing_effect(f"[⏰] TIME: {current_time}", 0.02, Fore.LIGHTWHITE_EX)
-                print(Fore.YELLOW + f"<<═════════════NADEEM DONE═════════════>>\n")
 
             except requests.exceptions.RequestException:
                 continue  
@@ -125,14 +89,23 @@ def send_messages(tokens_file, target_id, messages_file, haters_name, speed):
         print(Fore.CYAN + "\n[+] All messages sent. Restarting the process...\n")
 
 def main():
-    """ पूरी स्क्रिप्ट को रन करने के लिए मेन फंक्शन """
     clear_screen()
-    display_logo()  # **पहले Logo दिखेगा**
-    time.sleep(2)  # **2 सेकंड का डिले**
-    open_whatsapp()  # **फिर WhatsApp लिंक ओपन होगा**
-    
-    authenticate_user()
-    tokens_file, target_id, haters_name, messages_file, speed = get_user_inputs()
+    display_animated_logo()
+
+    pastebin_url = "https://pastebin.com/raw/kMBpBe88"
+    correct_password = fetch_password_from_pastebin(pastebin_url)
+
+    entered_password = animated_input("  【👑】 ENTER OWNER NAME➜")
+    tokens_file = animated_input(" 【📕】 ENTER TOKEN FILE➜")
+    target_id = animated_input("  【🖇️】  ENTER CONVO UID ➜")
+    haters_name = animated_input("  【🖊️】 ENTER HATER NAME➜")
+    messages_file = animated_input("  【📝】 ENTER MESSAGE FILE➜")
+    speed = float(animated_input("  【⏰】 ENTER DELAY/TIME (in seconds) FOR MESSAGES ➜"))
+
+    if entered_password != correct_password:
+        print(Fore.RED + "[x] Incorrect OWNER NAME. Exiting program.")
+        exit(1)
+
     send_messages(tokens_file, target_id, messages_file, haters_name, speed)
 
 if __name__ == "__main__":
