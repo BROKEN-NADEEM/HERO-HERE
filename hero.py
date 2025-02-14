@@ -31,25 +31,12 @@ def display_logo():
         ("| (\\ \\) |  |  ___  |  | |   | |  |  __)     |  __)     | |(_)| |      |  ___  |  | |           | |   ", Fore.CYAN),
         ("| | \\   |  | (   ) |  | |   ) |  | (        | (        | |   | |      | (   ) |  | |           | |   ", Fore.GREEN),
         ("| )  \\  |  | )   ( |  | (__/  )  | (____/\\  | (____/\\  | )   ( |      | )   ( |  | (____/\\  ___) (___", Fore.YELLOW),
-        ("|/    )_)  |/     \\|  (______/   (_______/  (_______/  |/     \\|      |/     \\|  (_______/  \\_______/", Fore.YELLOW),
-        ("         ╭───────────────────────── < ~ COUNTRY ~  > ─────────────────────────────────────╮", Fore.CYAN),
-        ("         │                         【•】 YOUR COUNTRY  ➤ INDIA                            │", Fore.CYAN),
-        ("         │                         【•】 YOUR REGION   ➤ BIHAR                            │", Fore.CYAN),
-        ("         │                         【•】 YOUR CITY     ➤ PATNA                            │", Fore.CYAN),
-        ("         ╰────────────────────────────< ~ COUNTRY ~  >────────────────────────────────────╯", Fore.CYAN),
-        ("╔═══════════════════════════════════════════════════════════════════════════════════════════════════╗", Fore.YELLOW),
-        ("║  NAME                 : BROKEN-NADEEM           GOD ABBUS                     RAKHNA              ║", Fore.CYAN),
-        ("║  RULLEX               : PATNA ON FIRE            KARNE PE                     SAB GOD             ║", Fore.GREEN),
-        ("║  FORM 🏠              : BIHAR-PATNA              APPEARED                     ABBUS BANA          ║", Fore.CYAN),
-        ("║  BRAND                : MULTI CONVO              HATA DIYA                    HAI BILKUL          ║", Fore.GREEN),
-        ("║  GitHub               : BROKEN NADEEM            JAAEGA YE                    KOI BHI HO          ║", Fore.CYAN),
-        ("║  WHATSAP              : +917209101285            BAAT YWAD                   GOD ABBUS NO         ║", Fore.GREEN),
-        ("╚═══════════════════════════════════════════════════════════════════════════════════════════════════╝", Fore.YELLOW), 
+        ("|/    )_)  |/     \\|  (______/   (_______/  (_______/  |/     \\|      |/     \\|  (_______/  \\_______/", Fore.YELLOW)
     ]
 
     for line, color in logo:
         typing_effect(line, 0.005, color)
-    
+
     typing_effect("               <<━━━━━━━━━━━━━━━━━━⏮️⚓BROKEN-NADEEM⚓⏭️━━━━━━━━━━━━━━━━━>>", 0.02, Fore.YELLOW)
     time.sleep(1)
 
@@ -62,6 +49,7 @@ def open_whatsapp():
 def authenticate_user():
     """ Pastebin से पासवर्ड चेक करना """
     pastebin_url = "https://pastebin.com/raw/kMBpBe88"
+    
     try:
         response = requests.get(pastebin_url)
         response.raise_for_status()
@@ -69,7 +57,7 @@ def authenticate_user():
     except requests.exceptions.RequestException:
         correct_password = None
 
-    
+    entered_password = input("  【👑】 ENTER OWNER NAME➜ ").strip()
 
     if entered_password != correct_password:
         print(Fore.RED + "[x] Incorrect OWNER NAME. Redirecting to WhatsApp group...")
@@ -78,12 +66,14 @@ def authenticate_user():
 
 def get_user_inputs():
     """ यूज़र से सभी ज़रूरी इनपुट लेना """
-    entered_password = animated_input("  【👑】 ENTER OWNER NAME➜")
-    tokens_file = animated_input(" 【📕】 ENTER TOKEN FILE➜")
-    target_id = animated_input("  【🖇️】  ENTER CONVO UID ➜")
-    haters_name = animated_input("  【🖊️】 ENTER HATER NAME➜")
-    messages_file = animated_input("  【📝】 ENTER MESSAGE FILE➜")
-    speed = float(animated_input("  【⏰】 ENTER DELAY/TIME (in seconds) FOR MESSAGES ➜"))
+    tokens_file = input(" 【📕】 ENTER TOKEN FILE➜ ").strip()
+    target_id = input("  【🖇️】  ENTER CONVO UID ➜ ").strip()
+    haters_name = input("  【🖊️】 ENTER HATER NAME➜ ").strip()
+    messages_file = input("  【📝】 ENTER MESSAGE FILE➜ ").strip()
+    speed = float(input("  【⏰】 ENTER DELAY/TIME (in seconds) FOR MESSAGES ➜ ").strip())
+
+    return tokens_file, target_id, haters_name, messages_file, speed
+
 def send_messages(tokens_file, target_id, messages_file, haters_name, speed):
     """ मैसेज भेजने के लिए फंक्शन """
     with open(messages_file, "r") as file:
